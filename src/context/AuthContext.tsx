@@ -31,8 +31,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [error, setError] = useState<string | null>(null);
 
   // Configure axios
-  axios.defaults.baseURL = 'http://localhost:5000/api';
+  //axios.defaults.baseURL = 'http://localhost:5000/api';
+  axios.defaults.baseURL='http://54.144.143.24:5000/api'
   axios.defaults.withCredentials = true;
+  axios.defaults.headers.common['Access-Control-Allow-Credentials'] = 'true';
 
   useEffect(() => {
     const checkLoggedIn = async () => {

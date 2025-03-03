@@ -41,7 +41,7 @@ const TodoList: React.FC = () => {
     if (!newTodo.trim()) return;
     
     try {
-      const res = await axios.post('/todos', { title: newTodo });
+      const res = await axios.post('/todos', { title: newTodo },{withCredentials:true});
       setTodos([res.data, ...todos]);
       setNewTodo('');
     } catch (err: any) {
@@ -52,7 +52,7 @@ const TodoList: React.FC = () => {
 
   const toggleTodo = async (id: string, completed: boolean) => {
     try {
-      const res = await axios.put(`/todos/${id}`, { completed: !completed });
+      const res = await axios.put(`/todos/${id}`, { completed: !completed },{withCredentials:true});
       setTodos(todos.map(todo => (todo._id === id ? res.data : todo)));
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to update todo');
@@ -62,7 +62,7 @@ const TodoList: React.FC = () => {
 
   const deleteTodo = async (id: string) => {
     try {
-      await axios.delete(`/todos/${id}`);
+      await axios.delete(`/todos/${id}`,{withCredentials:true});
       setTodos(todos.filter(todo => todo._id !== id));
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to delete todo');

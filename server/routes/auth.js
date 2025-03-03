@@ -35,9 +35,10 @@ router.post('/register', async (req, res) => {
       const token = generateToken(user._id);
       
       res.cookie('token', token, {
-        httpOnly: true,
+        httpOnly: false,
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        sameSite: 'strict'
+        sameSite: 'None',
+        secure:false
       });
 
       res.status(201).json({
@@ -68,9 +69,9 @@ router.post('/login', async (req, res) => {
       const token = generateToken(user._id);
       
       res.cookie('token', token, {
-        httpOnly: true,
+        httpOnly: false,
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        sameSite: 'strict'
+        sameSite: 'None'
       });
 
       res.json({
